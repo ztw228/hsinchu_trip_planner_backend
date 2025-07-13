@@ -7,10 +7,18 @@ from .data import load_attractions, load_hotels
 
 app = FastAPI(title="Hsinchu Trip Planner API")
 
+# ★ 把前端網域加進 allow_origins
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], allow_methods=["*"], allow_headers=["*"]
+    allow_origins=[
+        "https://hsinchu-trip-planner-front-320837244860.asia-east1.run.app",
+        "http://localhost:5500",          # ← 本機測試時可用 (可刪)
+    ],
+    allow_methods=["*"],
+    allow_headers=["*"],
+    allow_credentials=False
 )
+
 
 ATTRACTIONS = load_attractions()
 HOTELS      = load_hotels()
